@@ -1,0 +1,58 @@
+
+.playerPage {
+  position: absolute;
+  width: 100%;
+  //height: 100%;
+  background-color: yellow;
+}
+
+.playerList {
+  position: relative;
+  width: 60%;
+}
+
+.playerBox {
+  position: relative;
+  display: inline-block;
+  width: 150px;
+  height: 200px;
+  text-align: center;
+  border: 4px solid green;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 5px;
+
+}
+
+.playerBox > img {
+  height: 100px;
+}
+
+.playerName {
+  color: orange;
+  font-size: 18px;
+  font-weight: 900;
+}
+
+.playerInfo {
+  color: purple;
+  font-size: 10px;
+}
+
+.playerShowcase {
+  position: fixed;
+  right: 20px;
+  top: 20px;
+  width: 30%;
+  height: 20px;
+  background-color: white;
+  border: 10px solid blue;
+  border-radius: 20px;
+  padding: 10px;
+  transition: height .5s;
+  -webkit-transition: height .5s;
+}
+
+.playerShowcase.focus {
+  height: 200px;
+}

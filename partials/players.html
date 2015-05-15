@@ -1,0 +1,21 @@
+<div class="playerPage" ng-click="Players.clear()">
+
+  <div class="playerList">
+    <div 
+      ng-repeat="player in Players.players" 
+      class="playerBox"
+      ng-click="Players.showPlayerDetail(player.id); $event.stopPropagation()">
+
+      <p class="playerName">{{player.name}}</p>
+      <!-- https changed to http for local (insecure) development to head off browser complaints -->
+      <img ng-src="{{player.image.replace('https', 'http')}}">
+
+    </div>
+  </div>
+
+  <div class="playerShowcase">
+  Select a player to view details {{Players.twoNumbersAddedByBadgeville}}
+    <player-detail id="{{Players.playerId}}"></player-detail>
+  </div>
+
+</div>
