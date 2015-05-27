@@ -24,20 +24,22 @@ myBadgevilleApp
 
   var ctrl = this; // expose top-level this object (so accessible from within functions)
 
+  ctrl.playerInShowcase = null;
+
   getPlayers.fetch().then(function(response){
     ctrl.players = response;
   });
 
   ctrl.twoNumbersAddedByBadgeville = badgeville.addNumbers(10,10);
 
-  ctrl.showPlayerDetail = function(id) {
-    $log.debug('See details for player w id: ', id);
-    ctrl.playerId = id;
+  ctrl.showPlayerDetail = function(player) {
+    $log.debug('See details for player object: ', player);
+    ctrl.playerInShowcase = player;
   };
 
   ctrl.clear = function() {
     $log.debug('clear');
-    ctrl.playerId = '';
+    ctrl.playerInShowcase = '';
   }
 
 })
@@ -47,7 +49,7 @@ myBadgevilleApp
       getNextPlayerBatch;
 
   self.players = [];
-  
+
   // private recursive function to retrieve complete player dataset by offset pages.
   // this function is recursive in order to retrieve the entire data set for this programming test -- the api only provides page batches (partial dataset) at a time.
   // in production this would either be a more limited recursion (to fetch some limited initial data set) or
@@ -67,7 +69,7 @@ myBadgevilleApp
         // check if players field is an array and if so if it has any length
         $log.debug('unwrapped players: ', unwrappedPlayers, ' is array ? ', Array.isArray(unwrappedPlayers), 'of length: ', unwrappedPlayers.length);
         // make sure returned data is actually an array and has length
-        if (Array.isArray(unwrappedPlayers) && unwrappedPlayers.length) { 
+        if (Array.isArray(unwrappedPlayers) && unwrappedPlayers.length) {
           $log.debug('unwrapped is array...', unwrappedPlayers, ' with length ', unwrappedPlayers.length);
           // append results to self.players array
           self.players = self.players.concat(unwrappedPlayers);
@@ -81,16 +83,16 @@ myBadgevilleApp
             $log.debug('returning final', self.players);
             return self.players;
           }
-        } 
+        }
         // in case returned data is not array or 0 length, return what we've got
         else {
           return self.players;
         };
-    }, 
-    // hopefully we never get an error 
+    },
+    // hopefully we never get an error
       function(e) {
         $log.error('got error: ', e);
-      });    
+      });
   }
 
   // publicly exposed function
@@ -108,6 +110,6 @@ myBadgevilleApp
 
   //return getNextPlayerBatch;
   return self;
-  
+
 
 })

@@ -7,18 +7,21 @@ myBadgevilleApp
   return {
     restrict: 'E',
     scope: {
-      id: '@'
+      player: '=playerInShowcase'
     },
     link: function(scope, elem) {
-      scope.$watch('id', showcase);
+      scope.$watch('player', showcase);
 
       function showcase(newVal){
+        var player = newVal;
         $log.debug('showcasing id called w value:', newVal);
 
         if (newVal) {
           elem.parent().addClass('focus');
+          elem.parent().addClass('bounce');
         } else {
           elem.parent().removeClass('focus');
+          elem.parent().removeClass('bounce');
         }
 
       }
